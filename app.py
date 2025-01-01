@@ -2,6 +2,8 @@ import pywifi
 from pywifi import const
 import time
 
+# Only available on Windows
+
 def get_wifi_signal_strength():
     try:
         # Create a Wi-Fi object
