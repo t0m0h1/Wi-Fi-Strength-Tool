@@ -38,3 +38,6 @@ def get_wifi_signal_strength():
 
 if __name__ == "__main__":
     get_wifi_signal_strength()
+
+
+# include matplotlib plot to show the signal strength
