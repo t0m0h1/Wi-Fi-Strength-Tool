@@ -29,6 +29,9 @@ def get_wifi_signal_strength():
 
         print(f"{'SSID':<30}{'Signal Strength (dBm)':<20}")
         print("-" * 50)
+        print("\n")
+        print("Lower the value of DBM, better the signal strength")
+        print("\n")
 
         ssids = []
         signal_strengths = []
@@ -48,22 +51,33 @@ def get_wifi_signal_strength():
     
 
 
-def plot_signal_strength(ssids, signal_strengths):
+def plot_signal_strength(ssids, signal_strengths, max_ssids=20):
     if not ssids or not signal_strengths:
         print("No data available to plot.")
         return
 
-    plt.figure(figsize=(10, 6))
-    plt.barh(ssids, signal_strengths, color='skyblue')
-    plt.xlabel('Signal Strength (dBm)')
-    plt.ylabel('SSID')
+    # Sort by signal strength (optional)
+    sorted_data = sorted(zip(ssids, signal_strengths), key=lambda x: x[1], reverse=True)
+    sorted_ssids, sorted_strengths = zip(*sorted_data)
+
+    # Limit the number of SSIDs to display
+    limited_ssids = sorted_ssids[:max_ssids]
+    limited_strengths = sorted_strengths[:max_ssids]
+
+    plt.figure(figsize=(12, 8))
+    plt.bar(limited_ssids, limited_strengths, color='skyblue')
+    plt.xlabel('SSID')
+    plt.ylabel('Signal Strength (dBm)')
     plt.title('Wi-Fi Signal Strength')
-    plt.gca().invert_yaxis()  # Invert the y-axis for better readability
-    plt.grid(axis='x', linestyle='--', alpha=0.7)
+    plt.xticks(rotation=45, ha='right')  # Rotate SSID labels for readability
+    plt.grid(axis='y', linestyle='--', alpha=0.7)
+    plt.tight_layout()  # Adjust layout to fit labels
     plt.show()
+
 
 
 
 if __name__ == "__main__":
     ssids, signal_strengths = get_wifi_signal_strength()
     plot_signal_strength(ssids, signal_strengths)
+
