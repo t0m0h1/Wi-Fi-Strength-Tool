@@ -1,6 +1,7 @@
 import pywifi
 from pywifi import const
 import time
+import matplotlib.pyplot as plt
 
 # Only available on Windows
 
@@ -36,8 +37,17 @@ def get_wifi_signal_strength():
     except Exception as e:
         print(f"An error occurred: {e}")
 
-if __name__ == "__main__":
-    get_wifi_signal_strength()
 
 
 # include matplotlib plot to show the signal strength
+
+def plot_signal_strength():
+    pass
+
+
+
+
+
+
+if __name__ == "__main__":
+    get_wifi_signal_strength()
